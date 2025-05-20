@@ -15,21 +15,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, TeamViewSet, ActivityViewSet, LeaderboardViewSet, WorkoutViewSet
+from django.urls import path
 from .views import UserList, TeamList, ActivityList, LeaderboardList, WorkoutList
-
-router = DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'teams', TeamViewSet)
-router.register(r'activity', ActivityViewSet)
-router.register(r'leaderboard', LeaderboardViewSet)
-router.register(r'workouts', WorkoutViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
     path('users/', UserList.as_view(), name='user-list'),
     path('teams/', TeamList.as_view(), name='team-list'),
     path('activities/', ActivityList.as_view(), name='activity-list'),
