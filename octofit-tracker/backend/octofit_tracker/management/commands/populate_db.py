@@ -6,20 +6,27 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # Create test users
-        user1 = User.objects.create(email='user1@example.com', name='User One', password='password1')
-        user2 = User.objects.create(email='user2@example.com', name='User Two', password='password2')
+        user1 = User(email='user1@example.com', name='User One', password='password1')
+        user1.save()
+        user2 = User(email='user2@example.com', name='User Two', password='password2')
+        user2.save()
 
         # Create test teams
-        team1 = Team.objects.create(name='Team Alpha', members=[user1, user2])
+        team1 = Team(name='Team Alpha', members=[user1, user2])
+        team1.save()
 
         # Create test activities
-        Activity.objects.create(user=user1, type='Running', duration=30)
-        Activity.objects.create(user=user2, type='Cycling', duration=45)
+        activity1 = Activity(user=user1, type='Running', duration=30)
+        activity1.save()
+        activity2 = Activity(user=user2, type='Cycling', duration=45)
+        activity2.save()
 
         # Create test leaderboard
-        Leaderboard.objects.create(team=team1, points=100)
+        leaderboard1 = Leaderboard(team=team1, points=100)
+        leaderboard1.save()
 
         # Create test workouts
-        Workout.objects.create(name='Morning Yoga', description='A relaxing yoga session to start the day.')
+        workout1 = Workout(name='Morning Yoga', description='A relaxing yoga session to start the day.')
+        workout1.save()
 
         self.stdout.write(self.style.SUCCESS('Successfully populated the database with test data'))
